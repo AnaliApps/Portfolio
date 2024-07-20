@@ -6,6 +6,16 @@ import Contact from './contact.js';
 import Footer from './footer.js';
 import './style.css'
 
+class Projects{
+    constructor(title,link){
+        this.title = title;
+        this.link = link;
+    }
+    setTitle(_title){
+        this.title = _title;
+    }
+    
+}
 let main = document.createElement('div');
 main.setAttribute('class','main')
 let content = document.createElement('div');
@@ -30,19 +40,29 @@ navUl.forEach(item=>{
         if(e.target.id === 'home'){
             content.innerHTML = ''
             content.appendChild(Home())
-            toggleClass(e.target)
+            toggleClass(e)
         }else if(e.target.id === 'portfolio'){
             content.innerHTML =  '';
             content.appendChild(Portfolio())
-            toggleClass(e.target)
+            let projectsList = [];
+            let btnAdd = document.querySelector('.btnAdd')
+            let title = document.querySelector('#title')
+            let link = document.querySelector('#link')
+            btnAdd.addEventListener('click',()=>{
+                let project = new Projects(title.value,link.value)
+                projectsList = [...projectsList,project]
+                console.log(projectsList)
+                console.log('addding projects')
+            })
+            toggleClass(e)
         }else if(e.target.id === 'about'){
             content.innerHTML =  '';
             content.appendChild(About())
-            toggleClass(e.target)
+            toggleClass(e)
         }else if(e.target.id === 'contact'){
             content.innerHTML =  '';
             content.appendChild(Contact())
-            toggleClass(e.target)
+            toggleClass(e)
         }
     })
 })
