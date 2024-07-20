@@ -7,6 +7,7 @@ import Footer from './footer.js';
 import './style.css'
 
 let main = document.createElement('div');
+main.setAttribute('class','main')
 let content = document.createElement('div');
 content.setAttribute('id','content');
 content.appendChild(Home())

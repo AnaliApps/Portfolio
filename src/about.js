@@ -7,14 +7,23 @@ export default function About(){
     let h3 = document.createElement('h3')
     h3.innerHTML = 'Biograpghy'
     let p = document.createElement('p')
-    p.innerHTML = 'asdasdiuiuasd oiasodiashod oias diashdsa aisdasidoasidhos'
+    p.innerHTML = `<b>Anali Rono</b> is a skilled front-end we developer with a passion for crafting visually appealing and user-friendly websites. With extensive experience in JavaScript,HTML and CSS, Anali excels at bringing creative concepts to life, ensuring seamless functionality and an engaging user experience.`
+    let h3_heading = document.createElement('h3');
+    h3_heading.innerHTML = 'Skills'
     let ul = document.createElement('ul')
-    let li = document.createElement('li');
-    li.innerHTML = 'Skills'
-    ul.appendChild(li)
+    let li_js = document.createElement('li');
+    li_js.innerHTML = 'JavaScript'
+    let li_css = document.createElement('li');
+    li_css.innerHTML = 'CSS'
+    let li_html = document.createElement('li');
+    li_html.innerHTML = 'HTML'
+    ul.appendChild(li_html)
+    ul.appendChild(li_css)
+    ul.appendChild(li_js)
     div.appendChild(h2)
     div.appendChild(h3)
     div.appendChild(p);
+    div.appendChild(h3_heading)
     div.appendChild(ul)
     return div
 }
