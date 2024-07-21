@@ -13,8 +13,14 @@ export default function Portfolio(){
     addLinkInput.setAttribute('id','link')
     btnAdd.innerText = 'Submit'
     btnAdd.setAttribute('class','btnAdd')
-    portfolio_projects.appendChild(btnAdd)
-    portfolio_projects.appendChild(addTitleInput)
-    portfolio_projects.appendChild(addLinkInput)
+    let card = document.createElement('div')
+    card.setAttribute('class',"projects_card")
+    let input_div = document.createElement('div')
+    input_div.setAttribute('class','inputDiv')
+    input_div.appendChild(btnAdd)
+    input_div.appendChild(addTitleInput)
+    input_div.appendChild(addLinkInput)
+    portfolio_projects.appendChild(input_div)
+    portfolio_projects.appendChild(card)
     return portfolio_projects;
 }

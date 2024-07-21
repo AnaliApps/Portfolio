@@ -44,6 +44,23 @@ function accessData(){
     let accessedData = JSON.parse(accessString)
     return accessedData
 }
+function updateUI(card){
+    let allProjects  = accessData()
+    allProjects.forEach(item=>{
+        let projectHeader = document.createElement('h2')
+        let projectLink = document.createElement("a")
+        let ul = document.createElement('ul')
+        let li = document.createElement('li')
+        let item_div = document.createElement('div')
+        projectHeader.innerHTML = item.title;
+        projectLink.innerHTML = item.link
+        item_div.appendChild(projectHeader)
+        item_div.appendChild(projectLink)
+        li.appendChild(item_div)
+        ul.appendChild(li)
+        card.appendChild(ul)
+    })
+}
 console.log(main)
 let navUl = document.querySelectorAll('#navigation>ul>li')
 navUl.forEach(item=>{
@@ -59,10 +76,13 @@ navUl.forEach(item=>{
             let btnAdd = document.querySelector('.btnAdd')
             let title = document.querySelector('#title')
             let link = document.querySelector('#link')
+            let projects_card = document.querySelector('.projects_card')
+            updateUI(projects_card)
             btnAdd.addEventListener('click',()=>{
                 let project = new Projects(title.value,link.value)
                 projectsList = [...projectsList,project]
                 save(projectsList)
+                updateUI(projects_card)
                 console.log(projectsList)
             })
             toggleClass(e)
