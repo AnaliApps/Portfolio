@@ -16,6 +16,7 @@ class Projects{
     }
     
 }
+let STORAGE_KEY_PORTFOLIO_SITE = 'projects.lists'
 let main = document.createElement('div');
 main.setAttribute('class','main')
 let content = document.createElement('div');
@@ -33,6 +34,16 @@ function toggleClass(activeLink){
         activeLink.classList.add('active')
     }
 }
+
+function save(arr){
+    let storageString = JSON.stringify(arr);
+    localStorage.setItem(STORAGE_KEY_PORTFOLIO_SITE,storageString);
+}
+function accessData(){
+    let accessString = localStorage.getItem(STORAGE_KEY_PORTFOLIO_SITE)
+    let accessedData = JSON.parse(accessString)
+    return accessedData
+}
 console.log(main)
 let navUl = document.querySelectorAll('#navigation>ul>li')
 navUl.forEach(item=>{
@@ -44,15 +55,15 @@ navUl.forEach(item=>{
         }else if(e.target.id === 'portfolio'){
             content.innerHTML =  '';
             content.appendChild(Portfolio())
-            let projectsList = [];
+            let projectsList = accessData()||[];
             let btnAdd = document.querySelector('.btnAdd')
             let title = document.querySelector('#title')
             let link = document.querySelector('#link')
             btnAdd.addEventListener('click',()=>{
                 let project = new Projects(title.value,link.value)
                 projectsList = [...projectsList,project]
+                save(projectsList)
                 console.log(projectsList)
-                console.log('addding projects')
             })
             toggleClass(e)
         }else if(e.target.id === 'about'){
