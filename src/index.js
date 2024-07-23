@@ -34,7 +34,9 @@ function toggleClass(activeLink){
         activeLink.classList.add('active')
     }
 }
-
+function refreshPage(){
+    window.location.reload()
+}
 function save(arr){
     let storageString = JSON.stringify(arr);
     localStorage.setItem(STORAGE_KEY_PORTFOLIO_SITE,storageString);
@@ -51,15 +53,53 @@ function updateUI(card){
         let projectLink = document.createElement("a")
         let ul = document.createElement('ul')
         let li = document.createElement('li')
+        li.setAttribute('class','projectItem')
         let item_div = document.createElement('div')
+        let buttonDel = document.createElement('button')
+        buttonDel.setAttribute('id','btnDel')
+        buttonDel.textContent = 'Delete'
+        let buttonEdit = document.createElement('button')
+        buttonEdit.setAttribute('id','btnEdit')
+        buttonEdit.textContent = 'Edit'
         projectHeader.innerHTML = item.title;
         projectLink.innerHTML = item.link
         item_div.appendChild(projectHeader)
         item_div.appendChild(projectLink)
+        item_div.appendChild(buttonDel)
+        item_div.appendChild(buttonEdit)
         li.appendChild(item_div)
         ul.appendChild(li)
         card.appendChild(ul)
     })
+}
+
+function deleteProject(){
+    let storedData = accessData()
+    let allProjects = document.querySelectorAll('.projectItem')
+    allProjects.forEach((item,index)=>{
+        item.addEventListener('click',(e)=>{
+            if(e.target.id === 'btnDel'){
+                e.target.parentNode.remove()
+                storedData.splice(index,1)
+                localStorage.setItem(STORAGE_KEY_PORTFOLIO_SITE,JSON.stringify(storedData))
+                refreshPage()
+                console.log(`deleting at ${index}`)
+            }else if(e.target.id === 'btnEdit'){
+                title.value = storedData[index].title;
+                link.value = storedData[index].link
+                e.target.addEventListener('click',()=>{
+                    storedData[index].title = title.value;
+                    storedData[index].link = link.value
+                    localStorage.setItem(STORAGE_KEY_PORTFOLIO_SITE,JSON.stringify(storedData))
+                    refreshPage()
+                })
+            }else{
+                return;
+            }
+        })
+    })
+    console.log(allProjects)
+    return allProjects
 }
 console.log(main)
 let navUl = document.querySelectorAll('#navigation>ul>li')
@@ -77,14 +117,16 @@ navUl.forEach(item=>{
             let title = document.querySelector('#title')
             let link = document.querySelector('#link')
             let projects_card = document.querySelector('.projects_card')
-            updateUI(projects_card)
+             updateUI(projects_card)
             btnAdd.addEventListener('click',()=>{
                 let project = new Projects(title.value,link.value)
                 projectsList = [...projectsList,project]
                 save(projectsList)
                 updateUI(projects_card)
+                refreshPage()
                 console.log(projectsList)
             })
+            deleteProject()
             toggleClass(e)
         }else if(e.target.id === 'about'){
             content.innerHTML =  '';
