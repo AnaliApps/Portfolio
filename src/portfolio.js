@@ -9,8 +9,10 @@ export default function Portfolio(){
     let btnAdd = document.createElement('button');
     let addTitleInput = document.createElement('input');
     addTitleInput.setAttribute('id','title')
+    addTitleInput.setAttribute('placeholder','Enter project title..')
     let addLinkInput = document.createElement('input');
     addLinkInput.setAttribute('id','link')
+    addLinkInput.setAttribute('placeholder','Enter link address..')
     btnAdd.innerText = 'Submit'
     btnAdd.setAttribute('class','btnAdd')
     let card = document.createElement('div')

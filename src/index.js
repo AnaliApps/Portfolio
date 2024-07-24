@@ -52,6 +52,7 @@ function updateUI(card){
         let projectHeader = document.createElement('h2')
         let projectLink = document.createElement("a")
         let ul = document.createElement('ul')
+        ul.setAttribute('class','allProjectItems')
         let li = document.createElement('li')
         li.setAttribute('class','projectItem')
         let item_div = document.createElement('div')
@@ -59,14 +60,17 @@ function updateUI(card){
         buttonDel.setAttribute('id','btnDel')
         buttonDel.textContent = 'Delete'
         let buttonEdit = document.createElement('button')
+        let buttonDiv = document.createElement('div')
+        buttonDiv.setAttribute('id','deleditbtn')
         buttonEdit.setAttribute('id','btnEdit')
         buttonEdit.textContent = 'Edit'
+        buttonDiv.appendChild(buttonEdit)
+        buttonDiv.appendChild(buttonDel)
         projectHeader.innerHTML = item.title;
-        projectLink.innerHTML = item.link
+        projectLink.innerHTML = `<a href=${item.link}>View Project</a>`
         item_div.appendChild(projectHeader)
         item_div.appendChild(projectLink)
-        item_div.appendChild(buttonDel)
-        item_div.appendChild(buttonEdit)
+        item_div.appendChild(buttonDiv)
         li.appendChild(item_div)
         ul.appendChild(li)
         card.appendChild(ul)
