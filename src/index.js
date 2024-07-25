@@ -91,6 +91,7 @@ function deleteProject(){
             }else if(e.target.id === 'btnEdit'){
                 title.value = storedData[index].title;
                 link.value = storedData[index].link
+                e.target.textContent = 'Update'
                 e.target.addEventListener('click',()=>{
                     storedData[index].title = title.value;
                     storedData[index].link = link.value
