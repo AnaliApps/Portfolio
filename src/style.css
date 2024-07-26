@@ -44,7 +44,8 @@ body{
     height: 2em;
 }
 .projects_card{
-    height: 60vh
+    height: 60vh;
+    margin-top: 1em;
 }
 .footer>ul>li>a{
     padding: 0.2em;
@@ -112,8 +113,17 @@ body{
     margin: 0.2em;
     background-color: rgb(230, 233, 236);
 }
-.inputDiv{
-    margin-bottom: 0.3em;
+.error{
+    border: 0.5px solid red;
+    background-color: rgb(184, 91, 91);
+    border-radius: 5px;
+}
+.errorDiv{
+    margin-bottom:1em;
+    background-color: rgb(182, 93, 93);
+}
+.errorDiv>p{
+    padding:0.2em;
 }
 a{
     text-decoration: none;
@@ -137,6 +147,9 @@ a{
     flex-direction: column;
     justify-content: center;
     align-items: center;
+}
+.footer>ul>li>a{
+    color: black;
 }
 #content{
     display: flex;

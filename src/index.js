@@ -76,7 +76,15 @@ function updateUI(card){
         card.appendChild(ul)
     })
 }
-
+function error(ele){
+    ele.style.borderColor = 'red'
+    ele.style.borderStyle = 'solid'
+    ele.style.borderSize = '0.5px'
+    document.querySelector(".errorDiv").style.visibility='visible'
+    document.querySelector('.inputDiv').style.marginBottom = '2em';
+    document.querySelector("#error").innerHTML = 'Cannot submit empty field'
+    return
+}
 function deleteProject(){
     let storedData = accessData()
     let allProjects = document.querySelectorAll('.projectItem')
@@ -123,14 +131,28 @@ navUl.forEach(item=>{
             let link = document.querySelector('#link')
             let projects_card = document.querySelector('.projects_card')
              updateUI(projects_card)
-            btnAdd.addEventListener('click',()=>{
-                let project = new Projects(title.value,link.value)
-                projectsList = [...projectsList,project]
-                save(projectsList)
-                updateUI(projects_card)
-                refreshPage()
-                console.log(projectsList)
-            })
+                btnAdd.addEventListener('click',()=>{
+                    if((title.value !== '' && link.value !== '')){
+                        if(!link.checkValidity() || !title.checkValidity()){
+                            document.querySelector(".errorDiv").style.visibility='visible'
+                            document.querySelector('.inputDiv').style.marginBottom = '2em';
+                            document.querySelector("#error").innerHTML = 'Please enter a correct URL'
+                            return
+                        }
+                        let project = new Projects(title.value,link.value)
+                        projectsList = [...projectsList,project]
+                        save(projectsList)
+                        updateUI(projects_card)
+                        refreshPage()
+                        console.log(projectsList)
+                    }else{
+                        if(title.value === ''){
+                            error(title)
+                        }else if(link.value === ''){
+                            error(link)
+                        }
+                    }
+                })
             deleteProject()
             toggleClass(e)
         }else if(e.target.id === 'about'){
